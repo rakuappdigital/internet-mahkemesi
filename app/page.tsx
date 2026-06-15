@@ -1,12 +1,15 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import type { Oyuncu, Rol } from "@/lib/types";
+import { BOT_MAHKEME } from "@/lib/types";
 
 export default function AnaSayfa() {
   const router = useRouter();
   const [mod, setMod] = useState<"anlik" | "async">("anlik");
   const [katilKod, setKatilKod] = useState("");
   const [yukleniyor, setYukleniyor] = useState(false);
+  const [demoYukleniyor, setDemoYukleniyor] = useState(false);
   const [hata, setHata] = useState("");
 
   async function odaOlustur() {
@@ -25,6 +28,48 @@ export default function AnaSayfa() {
       setHata(e instanceof Error ? e.message : "Bir hata oluştu");
     } finally {
       setYukleniyor(false);
+    }
+  }
+
+  async function demoBaslat() {
+    setDemoYukleniyor(true);
+    setHata("");
+    try {
+      // Oda oluştur
+      const res = await fetch("/api/oda", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mod: "anlik" }),
+      });
+      const oda = await res.json();
+      if (!res.ok) throw new Error(oda.error);
+
+      // İlk davayı çek
+      const { default: davalar } = await import("@/data/davalar.json");
+      const dava = davalar[Math.floor(Math.random() * Math.min(5, davalar.length))];
+
+      // Hakim (kullanıcı) + botlar
+      const hakim: Oyuncu = { id: crypto.randomUUID(), takma_ad: "Sen (Hakim)", rol: "hakim", avatar: 0 };
+      const botlar: Oyuncu[] = (["davaci", "davali", "davaci_avukat", "davali_avukat"] as Rol[]).map((rol) => {
+        const b = BOT_MAHKEME[rol];
+        return { id: b.id, takma_ad: b.takma_ad, rol, is_bot: true };
+      });
+      const juriBotlar: Oyuncu[] = [1, 2, 3].map((i) => ({
+        id: `bot-j${i}`, takma_ad: `Jüri-${i} 🤖`, rol: "juri" as Rol, juri_index: i, is_bot: true,
+      }));
+
+      const { supabase } = await import("@/lib/supabase");
+      await supabase.from("odalar").update({
+        oyuncular: [hakim, ...botlar, ...juriBotlar],
+        dava_id: dava.id,
+        durum: "aktif",
+      }).eq("id", oda.id);
+
+      localStorage.setItem(`oyuncu-${oda.id}`, JSON.stringify(hakim));
+      router.push(`/oda/${oda.id}/mahkeme`);
+    } catch (e: unknown) {
+      setHata(e instanceof Error ? e.message : "Demo başlatılamadı");
+      setDemoYukleniyor(false);
     }
   }
 
@@ -56,8 +101,28 @@ export default function AnaSayfa() {
         </p>
       </div>
 
+      {/* Demo — tek tıkla başla */}
+      <div className="w-full max-w-sm flex flex-col gap-2">
+        <button
+          className="btn-primary w-full py-4 text-base font-bold"
+          onClick={demoBaslat}
+          disabled={demoYukleniyor}
+        >
+          {demoYukleniyor ? "⏳ Başlatılıyor..." : "🧪 Hemen Dene — Tek Tıkla Başla"}
+        </button>
+        <p className="text-xs text-center" style={{ color: "var(--muted)" }}>
+          Sen hakim ol, geri kalanı yapay zeka bots oynar. İsim gerekmez.
+        </p>
+      </div>
+
+      <div className="flex items-center gap-3 w-full max-w-sm">
+        <hr className="flex-1" style={{ borderColor: "var(--border)" }} />
+        <span className="text-xs" style={{ color: "var(--muted)" }}>ya da</span>
+        <hr className="flex-1" style={{ borderColor: "var(--border)" }} />
+      </div>
+
       <div className="card p-6 w-full max-w-sm flex flex-col gap-4">
-        <h2 className="font-bold text-lg">Yeni Oda Oluştur</h2>
+        <h2 className="font-bold text-lg">Arkadaşlarla Oyna</h2>
 
         <div className="flex gap-2">
           <button
