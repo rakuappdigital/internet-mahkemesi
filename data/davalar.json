@@ -1,0 +1,152 @@
+[
+  {
+    "id": "d001",
+    "baslik": "Arkadaşım şarj aletimi 3 aydır iade etmedi, hâlâ 'ödünç aldım' diyor",
+    "zorluk": "kolay",
+    "kategori": "arkadaşlık",
+    "arka_plan": "Davacı 3 ay önce arkadaşına şarj aleti ödünç vermiştir. Davalı hâlâ 'ödünç aldım' demekte ve geri vermemektedir.",
+    "davaci_ipucu": "Ne zaman istediğini, kaç kez sorduğunu ve şarj aletinin değerini belirt.",
+    "davali_ipucu": "Neden geri vermediğini, ödünç almanın süreli olmadığını savun.",
+    "hakim_ipucu": "Tarafların sürelerini dengele, jüriye yeterli bilgi aktarıldığından emin ol."
+  },
+  {
+    "id": "d002",
+    "baslik": "Ananaslı pizza sipariş etmek ilişkiyi bitirmeye yeterli sebep midir?",
+    "zorluk": "kolay",
+    "kategori": "yemek",
+    "arka_plan": "Davacı, davalının habersizce ananaslı pizza söylediğini öğrenmiş ve ilişkiyi bitirme kararı almıştır.",
+    "davaci_ipucu": "Ananaslı pizzanın ne kadar kötü olduğunu ve önceden sormadan sipariş etmenin saygısızlık olduğunu anlat.",
+    "davali_ipucu": "Ananaslı pizzanın lezzetli olduğunu ve izin almanın gerekmediğini savun.",
+    "hakim_ipucu": "Bu davada duygusal boyutu ön plana çıkar, lezzet tartışmasına girme."
+  },
+  {
+    "id": "d003",
+    "baslik": "Arkadaşımın Netflix hesabını 4 yıldır kullanıyorum, şimdi şifresini değiştirdi — tazminat hakkım var mı?",
+    "zorluk": "orta",
+    "kategori": "teknoloji",
+    "arka_plan": "Davacı 4 yıl boyunca davalının bilgisi dahilinde Netflix hesabını kullanmıştır. Davalı şifresini değiştirerek erişimi kesmiştir.",
+    "davaci_ipucu": "4 yıllık bağımlılığını, kaçırdığın dizileri ve duygusal zararı anlat.",
+    "davali_ipucu": "Netflix'in paylaşımı yasakladığını, hesabın sana ait olduğunu hatırlat.",
+    "hakim_ipucu": "Hukuki zemin çok zayıf ama duygusal argümanları değerlendir."
+  },
+  {
+    "id": "d004",
+    "baslik": "Mesajı görüp 6 saat sonra 'uyuyordum' diye cevaplamak ihanete girer mi?",
+    "zorluk": "orta",
+    "kategori": "ilişki",
+    "arka_plan": "Davacı acil bir mesaj göndermiştir. Davalı mesajı gördüğü hâlde 6 saat sonra 'uyuyordum' diyerek yanıtlamıştır.",
+    "davaci_ipucu": "Mesajın ne kadar acil olduğunu, 'görüldü' işaretinin delil olduğunu vurgula.",
+    "davali_ipucu": "Uyumanın bir suç olmadığını, mesajın aciliyetinin abartıldığını savun.",
+    "hakim_ipucu": "Teknolojik delilleri (son görülme) dikkate al."
+  },
+  {
+    "id": "d005",
+    "baslik": "Son dilim pizzayı sormadan yemek sosyal bir suç mudur?",
+    "zorluk": "kolay",
+    "kategori": "yemek",
+    "arka_plan": "Grup yemeğinde davalı, kimseye sormadan son dilim pizzayı yemiştir.",
+    "davaci_ipucu": "Son dilim pizzanın herkesin dilimi olduğunu, izin almanın sosyal bir zorunluluk olduğunu anlat.",
+    "davali_ipucu": "Pizza faturasına katkı yaptığını, kimsenin talep etmediğini savun.",
+    "hakim_ipucu": "Katkı oranlarını ve sosyal normları dengeli değerlendir."
+  },
+  {
+    "id": "d006",
+    "baslik": "Grup sohbetini sessize alan kişi davete çağrılmayı hak eder mi?",
+    "zorluk": "zor",
+    "kategori": "arkadaşlık",
+    "arka_plan": "Davacı bir etkinlik organize etmiştir. Davalının grup sohbetini uzun süredir sessizde tuttuğu ortaya çıkmıştır.",
+    "davaci_ipucu": "Gruba katılımın sosyal bir sorumluluk olduğunu, sessizin dayanışmayı zayıflattığını anlat.",
+    "davali_ipucu": "Sessizin bir suç olmadığını, bildirimlerin gürültüden bunaltıcı olduğunu savun.",
+    "hakim_ipucu": "Sessiz modun bilinçli bir dışlanma mı yoksa kişisel bir tercih mi olduğunu araştır."
+  },
+  {
+    "id": "d007",
+    "baslik": "Düğünde gelinlikten parlak giyinmek suç mudur?",
+    "zorluk": "zor",
+    "kategori": "sosyal",
+    "arka_plan": "Davacı (gelin) düğününde davalının kendisinden daha parlak bir kıyafet giydiğini iddia etmektedir.",
+    "davaci_ipucu": "Düğünün senin günün olduğunu, davalının bilerek dikkat çekmeye çalıştığını vurgula.",
+    "davali_ipucu": "Kıyafetin sıradan bir davet elbisesi olduğunu, kastın olmadığını savun.",
+    "hakim_ipucu": "Niyeti ve toplumsal normları dengeli değerlendir."
+  },
+  {
+    "id": "d008",
+    "baslik": "Ortak evi temizlemeden önce oyun oynamak ev arkadaşlığını bitirmeye yeter mi?",
+    "zorluk": "orta",
+    "kategori": "yaşam",
+    "arka_plan": "Taraflar bir temizlik anlaşması yapmıştır. Davalı temizlik günü bilgisayar oyunu oynarken yakalanmıştır.",
+    "davaci_ipucu": "Anlaşmanın sözlü de olsa bağlayıcı olduğunu, temizliği sen yaparken onun oyun oynadığını anlat.",
+    "davali_ipucu": "Anlaşmanın saat belirtmediğini, oyunu bitirince temizleyeceğini planladığını savun.",
+    "hakim_ipucu": "Anlaşmanın koşullarını ve niyeti sorgula."
+  },
+  {
+    "id": "d009",
+    "baslik": "Restorandaki kodu bilen kişi Wi-Fi'yi paylaşmak zorunda mıdır?",
+    "zorluk": "kolay",
+    "kategori": "teknoloji",
+    "arka_plan": "Davacı restoranda internete ihtiyaç duymaktadır. Davalı Wi-Fi şifresini bilmekte ama paylaşmayı reddetmektedir.",
+    "davaci_ipucu": "Dijital dayanışmanın toplumsal bir yükümlülük olduğunu, gizli tutmanın egoizm olduğunu anlat.",
+    "davali_ipucu": "Şifreyi kendin bulduğunu, müşteri avantajını koruma hakkın olduğunu savun.",
+    "hakim_ipucu": "Bilginin mülkiyeti ve paylaşım zorunluluğu üzerine karar ver."
+  },
+  {
+    "id": "d010",
+    "baslik": "Film seyresinde spoiler veren kişi manevi tazminat ödemeli midir?",
+    "zorluk": "orta",
+    "kategori": "sosyal",
+    "arka_plan": "Davacı uzun süredir beklettiği bir filmi izlemek üzereyken davalı sonu ifşa etmiştir.",
+    "davaci_ipucu": "Beklenti hakkının ihlal edildiğini, film deneyiminin mahvolduğunu duygusal olarak anlat.",
+    "davali_ipucu": "Filmin 3 yıl önce çıktığını, herkesin bildiğini, spoiler süresi dolduğunu savun.",
+    "hakim_ipucu": "Spoiler'ın kasıtlı mı tesadüfi mi olduğunu araştır."
+  },
+  {
+    "id": "d011",
+    "baslik": "Ofiste mikrodalgayı balıkla kullanmak suç sayılmalı mıdır?",
+    "zorluk": "kolay",
+    "kategori": "iş",
+    "arka_plan": "Davacı ofis mutfağında çalışmaktadır. Davalı her gün öğlen balık ısıtarak ortamı kullanılmaz hale getirmektedir.",
+    "davaci_ipucu": "Ortak alanın herkesin konforu için kullanılması gerektiğini, balık kokusunun çalışma verimini düşürdüğünü anlat.",
+    "davali_ipucu": "Sağlıklı beslenme hakkını, balığın besleyici değerini ve hiçbir yasak olmadığını savun.",
+    "hakim_ipucu": "Ortak alan kullanım kuralları ve bireysel haklar arasındaki dengeyi kur."
+  },
+  {
+    "id": "d012",
+    "baslik": "Doğum günü pastasındaki köşe dilimini alan kişi sosyal sözleşmeyi ihlal etti mi?",
+    "zorluk": "kolay",
+    "kategori": "yemek",
+    "arka_plan": "Davacı pasta kesildiğinde köşe dilimi için sırasını beklemiştir. Davalı sırayı atlayarak köşe dilimini almıştır.",
+    "davaci_ipucu": "Köşe diliminin en fazla kremalı kısım olduğunu ve sosyal bir anlaşmanın var olduğunu anlat.",
+    "davali_ipucu": "Pastanın herkese açık olduğunu, hız ve fırsatın belirleyici olduğunu savun.",
+    "hakim_ipucu": "Kuyruğa girme normları ve adalet ilkesi üzerinden karar ver."
+  },
+  {
+    "id": "d013",
+    "baslik": "Kahve makinesi ucuna 'son kişi doldurur' yazıyor ama kimse doldurmadı — kim sorumlu?",
+    "zorluk": "orta",
+    "kategori": "iş",
+    "arka_plan": "Ofisteki kahve makinesi üzerine uzun zamandır 'biten doldurun' yazısı vardır. Dün makineyi bitiren davalı doldurmamıştır.",
+    "davaci_ipucu": "Yazının açık bir sosyal sözleşme olduğunu, davalının onu görmezden geldiğini kanıtla.",
+    "davali_ipucu": "Yazının resmi bağlayıcılığı olmadığını, makineyi kimin boş bıraktığının belli olmadığını savun.",
+    "hakim_ipucu": "Yazısız kuralların hukuki geçerliliği ve kolektif sorumluluk üzerine karar ver."
+  },
+  {
+    "id": "d014",
+    "baslik": "Çift kişilik yatağın ortasında uyumak ilişki ihlali sayılır mı?",
+    "zorluk": "zor",
+    "kategori": "ilişki",
+    "arka_plan": "Davacı her gece yatak alanının davalı tarafından işgal edildiğini iddia etmektedir. Davalı 'farkında değilim' demektedir.",
+    "davaci_ipucu": "Uyku hakkının temel bir insan hakkı olduğunu, uyku yoksunluğunun sağlık sorununa yol açtığını anlat.",
+    "davali_ipucu": "Uykuda hareketin bilinçdışı olduğunu, kasıt olmaksızın suç oluşmayacağını savun.",
+    "hakim_ipucu": "Bilinçsiz eylem ile kasıtlı eylem arasındaki farkı hukuki açıdan değerlendir."
+  },
+  {
+    "id": "d015",
+    "baslik": "Asansörde bekleyen birine 'kapı açık tut' butonu yerine yanlış kata basmak suç mudur?",
+    "zorluk": "orta",
+    "kategori": "sosyal",
+    "arka_plan": "Davacı asansöre yetişmek için koşmuştur. Davalı içerideyken yanlış kata basarak kapının kapanmasına neden olmuştur.",
+    "davaci_ipucu": "Bilerek ya da dikkatsizlikle yapılmış olsa da sonucun aynı olduğunu ve bu durumun sosyal bir ihlal olduğunu anlat.",
+    "davali_ipucu": "Aceleden panikleyerek yanlış butona bastığını, kastın olmadığını ve özür dilediğini anlat.",
+    "hakim_ipucu": "Kaza ile ihmal arasındaki ince çizgiyi araştır."
+  }
+]
