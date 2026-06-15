@@ -49,10 +49,10 @@ export default function AnaSayfa() {
       <div className="text-center">
         <div className="text-5xl mb-3">⚖️</div>
         <h1 className="text-3xl font-bold tracking-tight" style={{ color: "var(--accent)" }}>
-          İnternet Mahkemesi
+          Judge Me or Not
         </h1>
         <p className="mt-2" style={{ color: "var(--muted)" }}>
-          Absürt davaları yargıla. Jüri ol. Karar ver.
+          Absürt davaları yargıla. Avukat ol. Karar ver.
         </p>
       </div>
 

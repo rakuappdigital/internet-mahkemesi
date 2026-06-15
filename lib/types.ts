@@ -20,6 +20,7 @@ export interface Oyuncu {
   rol: Rol;
   juri_index?: number; // 1-3
   is_bot?: boolean;
+  avatar?: number; // 0-9 face variant index
 }
 
 export interface Mesaj {

@@ -4,6 +4,12 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import type { Oda, Mesaj, Oyuncu, Dava, JuriOyu, Rol } from "@/lib/types";
 import davalarData from "@/data/davalar.json";
+import CourtBackground from "@/components/CourtBackground";
+import AvatarSVG from "@/components/avatars/AvatarSVG";
+import GavelScene from "@/components/transitions/GavelScene";
+import JuriScene from "@/components/transitions/JuriScene";
+import KararScene from "@/components/transitions/KararScene";
+import { rolToGroup } from "@/lib/avatarData";
 
 const ROL_RENK: Record<string, string> = {
   davaci:        "#e05252",
@@ -39,6 +45,8 @@ export default function MahkemeSayfasi({ params }: { params: Promise<{ id: strin
   const [hakimKarar, setHakimKarar] = useState("");
   const [gonderiyor, setGonderiyor] = useState(false);
   const [juriYukleniyor, setJuriYukleniyor] = useState(false);
+  const [sahne, setSahne] = useState<"acilis" | "juri" | "karar" | null>("acilis");
+  const [kararSonuc, setKararSonuc] = useState<"suclu" | "sucsuz" | "kararsiz">("sucsuz");
   const altRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -147,6 +155,7 @@ export default function MahkemeSayfasi({ params }: { params: Promise<{ id: strin
 
   async function juriTartismasinaGec() {
     if (!dava) return;
+    setSahne("juri");
     setJuriYukleniyor(true);
     await supabase.from("odalar").update({ durum: "juri_tartisma" }).eq("id", id);
 
@@ -192,6 +201,9 @@ export default function MahkemeSayfasi({ params }: { params: Promise<{ id: strin
     const suclu = juriOylari.filter((o) => o.karar === "suclu").length;
     const sucsuz = juriOylari.filter((o) => o.karar === "sucsuz").length;
     const kararsiz = juriOylari.filter((o) => o.karar === "kararsiz").length;
+    const kararResult: "suclu" | "sucsuz" | "kararsiz" = suclu > sucsuz ? "suclu" : suclu < sucsuz ? "sucsuz" : "kararsiz";
+    setKararSonuc(kararResult);
+    setSahne("karar");
     const sonuc = suclu > sucsuz ? "SUÇLU" : suclu < sucsuz ? "SUÇSUZ" : "BERABERLİK";
 
     await supabase.from("mesajlar").insert({
@@ -236,7 +248,17 @@ export default function MahkemeSayfasi({ params }: { params: Promise<{ id: strin
   }
 
   return (
-    <div className="min-h-screen flex flex-col max-w-2xl mx-auto w-full">
+    <div className="min-h-screen flex flex-col max-w-2xl mx-auto w-full relative">
+      {/* Sahne geçişleri */}
+      {sahne === "acilis" && <GavelScene label="Mahkeme Açılıyor" onDone={() => setSahne(null)} />}
+      {sahne === "juri" && <JuriScene onDone={() => setSahne(null)} />}
+      {sahne === "karar" && <KararScene karar={kararSonuc} onDone={() => setSahne(null)} />}
+
+      {/* Mahkeme arkaplanı */}
+      <div className="fixed inset-0 -z-10 overflow-hidden opacity-20 pointer-events-none">
+        <CourtBackground />
+      </div>
+
       {/* Başlık */}
       <div className="card m-2 sm:m-3 p-3 flex items-start justify-between gap-2">
         <div className="min-w-0">
@@ -313,23 +335,33 @@ export default function MahkemeSayfasi({ params }: { params: Promise<{ id: strin
             Henüz kimse konuşmadı. Davayı başlat!
           </div>
         )}
-        {mesajlar.map((m) => (
-          <div key={m.id} className={`flex flex-col ${m.oyuncu_id === benim.id ? "items-end" : "items-start"}`}>
-            <div className="flex items-center gap-1 mb-0.5">
-              <span className="text-xs font-semibold" style={{ color: ROL_RENK[m.rol] }}>{m.takma_ad}</span>
-              <span className="text-xs opacity-50" style={{ color: "var(--muted)" }}>[{ROL_LABEL[m.rol] ?? m.rol}]</span>
+        {mesajlar.map((m) => {
+          const sender = oda.oyuncular?.find((o) => o.id === m.oyuncu_id);
+          const avatarVariant = sender?.avatar ?? 0;
+          const isMine = m.oyuncu_id === benim.id;
+          return (
+            <div key={m.id} className={`flex gap-2 ${isMine ? "flex-row-reverse" : "flex-row"}`}>
+              <div className="flex-shrink-0 self-end">
+                <AvatarSVG rolGroup={rolToGroup(m.rol)} variant={avatarVariant} size={36} />
+              </div>
+              <div className={`flex flex-col ${isMine ? "items-end" : "items-start"}`}>
+                <div className="flex items-center gap-1 mb-0.5">
+                  <span className="text-xs font-semibold" style={{ color: ROL_RENK[m.rol] }}>{m.takma_ad}</span>
+                  <span className="text-xs opacity-50" style={{ color: "var(--muted)" }}>[{ROL_LABEL[m.rol] ?? m.rol}]</span>
+                </div>
+                <div
+                  className="max-w-[80%] sm:max-w-xs px-3 py-2 rounded-lg text-sm whitespace-pre-wrap break-words"
+                  style={{
+                    background: isMine ? "var(--accent2)33" : "var(--surface)",
+                    border: `1px solid ${isMine ? "var(--accent2)" : "var(--border)"}`,
+                  }}
+                >
+                  {m.icerik}
+                </div>
+              </div>
             </div>
-            <div
-              className="max-w-[80%] sm:max-w-xs px-3 py-2 rounded-lg text-sm whitespace-pre-wrap break-words"
-              style={{
-                background: m.oyuncu_id === benim.id ? "var(--accent2)33" : "var(--surface)",
-                border: `1px solid ${m.oyuncu_id === benim.id ? "var(--accent2)" : "var(--border)"}`,
-              }}
-            >
-              {m.icerik}
-            </div>
-          </div>
-        ))}
+          );
+        })}
         <div ref={altRef} />
       </div>
 

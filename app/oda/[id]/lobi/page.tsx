@@ -5,6 +5,9 @@ import { supabase } from "@/lib/supabase";
 import type { Oda, Rol, Oyuncu, Dava } from "@/lib/types";
 import { MAX_JURI, BOT_MAHKEME } from "@/lib/types";
 import davalarData from "@/data/davalar.json";
+import AvatarPicker from "@/components/avatars/AvatarPicker";
+import AvatarSVG from "@/components/avatars/AvatarSVG";
+import { rolToGroup } from "@/lib/avatarData";
 
 const ROL_ETIKETLER: Record<Rol, { label: string; renk: string; aciklama: string }> = {
   davaci:        { label: "Davacı",          renk: "#e05252", aciklama: "Şikayetini anlat, argümanını sun." },
@@ -29,6 +32,7 @@ export default function LobiSayfasi({ params }: { params: Promise<{ id: string }
   const [zorlukFiltre, setZorlukFiltre] = useState<string>("hepsi");
   const [benim, setBenim] = useState<Oyuncu | null>(null);
   const [yukleniyor, setYukleniyor] = useState(false);
+  const [seciliAvatar, setSeciliAvatar] = useState(0);
 
   useEffect(() => {
     const kayitli = localStorage.getItem(`oyuncu-${id}`);
@@ -69,6 +73,7 @@ export default function LobiSayfasi({ params }: { params: Promise<{ id: string }
       takma_ad: takmaAd.trim(),
       rol: seciliRol,
       juri_index: seciliRol === "juri" ? juriSayisi + 1 : undefined,
+      avatar: seciliAvatar,
     };
 
     const guncelOyuncular = [...(oda.oyuncular ?? []), oyuncu];
@@ -110,7 +115,7 @@ export default function LobiSayfasi({ params }: { params: Promise<{ id: string }
     if (!takmaAd.trim()) { alert("Önce takma adını gir"); return; }
     setYukleniyor(true);
     const dava = (davalarData as Dava[])[0];
-    const hakim: Oyuncu = { id: crypto.randomUUID(), takma_ad: takmaAd.trim(), rol: "hakim" };
+    const hakim: Oyuncu = { id: crypto.randomUUID(), takma_ad: takmaAd.trim(), rol: "hakim", avatar: seciliAvatar };
     const botlar: Oyuncu[] = (["davaci", "davali", "davaci_avukat", "davali_avukat"] as Rol[]).map((rol) => {
       const b = BOT_MAHKEME[rol];
       return { id: b.id, takma_ad: b.takma_ad, rol, is_bot: true };
@@ -161,7 +166,14 @@ export default function LobiSayfasi({ params }: { params: Promise<{ id: string }
               return (
                 <div key={rol} className="flex items-center gap-2 text-sm">
                   <span className="rol-badge" style={{ background: renk + "22", color: renk }}>{label}</span>
-                  <span>{oyuncu ? oyuncu.takma_ad : <span style={{ color: "var(--muted)" }}>Bot (otomatik)</span>}</span>
+                  {oyuncu ? (
+                    <div className="flex items-center gap-1">
+                      <AvatarSVG rolGroup={rolToGroup(rol)} variant={oyuncu.avatar ?? 0} size={28} />
+                      <span>{oyuncu.takma_ad}</span>
+                    </div>
+                  ) : (
+                    <span style={{ color: "var(--muted)" }}>Bot (otomatik)</span>
+                  )}
                 </div>
               );
             })}
@@ -206,6 +218,12 @@ export default function LobiSayfasi({ params }: { params: Promise<{ id: string }
         <label className="text-sm font-semibold">Takma Adın</label>
         <input className="input" placeholder="Mahkemede nasıl anılmak istersin?" value={takmaAd} onChange={(e) => setTakmaAd(e.target.value)} />
       </div>
+
+      <AvatarPicker
+        rolGroup={seciliRol ? rolToGroup(seciliRol) : "serbest"}
+        selected={seciliAvatar}
+        onChange={setSeciliAvatar}
+      />
 
       <div className="flex flex-col gap-2">
         <label className="text-sm font-semibold">Rolün</label>
@@ -274,12 +292,6 @@ export default function LobiSayfasi({ params }: { params: Promise<{ id: string }
 
       <div className="border-t pt-4" style={{ borderColor: "var(--border)" }}>
         <p className="text-xs mb-2 text-center" style={{ color: "var(--muted)" }}>— Demo —</p>
-        <input
-          className="input text-sm mb-2"
-          placeholder="Takma adın (demo için)"
-          value={takmaAd}
-          onChange={(e) => setTakmaAd(e.target.value)}
-        />
         <button className="btn-ghost w-full text-sm" onClick={demoBaslat} disabled={yukleniyor || !takmaAd.trim()}>
           🧪 Tek kişiyle başla — sen hakim, geri kalan botlar
         </button>
