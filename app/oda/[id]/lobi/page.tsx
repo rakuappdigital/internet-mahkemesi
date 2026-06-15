@@ -262,6 +262,18 @@ export default function LobiSayfasi({ params }: { params: Promise<{ id: string }
         {yukleniyor ? "Katılınıyor..." : "Katıl →"}
       </button>
 
+      <div className="border-t pt-4" style={{ borderColor: "var(--border)" }}>
+        <p className="text-xs mb-2 text-center" style={{ color: "var(--muted)" }}>— Demo —</p>
+        <input
+          className="input text-sm mb-2"
+          placeholder="Takma adın (demo için)"
+          value={takmaAd}
+          onChange={(e) => setTakmaAd(e.target.value)}
+        />
+        <button className="btn-ghost w-full text-sm" onClick={demoBaslat} disabled={yukleniyor || !takmaAd.trim()}>
+          🧪 Tek kişiyle başla — sen hakim, geri kalan botlar
+        </button>
+      </div>
     </div>
   );
 }
