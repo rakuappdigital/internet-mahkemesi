@@ -177,6 +177,16 @@ export default function LobiSayfasi({ params }: { params: Promise<{ id: string }
           <p className="text-sm" style={{ color: "var(--muted)" }}>Hakim mahkemeyi açana kadar bekle.</p>
         )}
 
+        <div className="border-t w-full pt-4" style={{ borderColor: "var(--border)" }}>
+          <p className="text-xs mb-2 text-center" style={{ color: "var(--muted)" }}>— Demo —</p>
+          <button
+            className="btn-ghost w-full text-sm"
+            onClick={() => { localStorage.removeItem(`oyuncu-${id}`); setBenim(null); }}
+          >
+            🧪 Demo moduna geç
+          </button>
+        </div>
+
         <p className="text-xs" style={{ color: "var(--muted)" }}>
           Paylaş: <strong>{typeof window !== "undefined" ? window.location.href : ""}</strong>
         </p>
